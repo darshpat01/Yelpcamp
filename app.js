@@ -6,6 +6,11 @@ const flash = require('connect-flash');
 const session = require('express-session'); 
 const methodOverride = require('method-override');
 const ExpressError = require("./utils/ExpressError");
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
+const User = require('./models/user');
+require('dotenv/config');
+
 
 
 
@@ -25,7 +30,7 @@ const reviews = require('./routes/reviews');
 
 // const seeds = require('./seeds/index');
 //  password = darshanp123
-mongoose.connect('mongodb+srv://darshan:darshan12345@cluster0.6r0ou.mongodb.net/yelp-camp?retryWrites=true&w=majority', {
+mongoose.connect(process.env.db_connection, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
@@ -64,7 +69,23 @@ const sessionConfig = {
     }
 }
 app.use(session(sessionConfig))
-app.use(flash())
+app.use(flash());
+
+
+app.use(passport.initialize());
+app.use(passport.session()); 
+passport.use(new LocalStrategy(User.authenticate()));
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser()); 
+
+
+app.get('/fakeUser', async(req,res)=>{
+    const user = new User({email: 'colt@gmail.com', username: 'colt'});
+    const newUser = await User.register(user,'chicken');
+    res.send(newUser); 
+})
+
 
 app.use((req, res, next) =>{
     res.locals.success = req.flash('success'); 
