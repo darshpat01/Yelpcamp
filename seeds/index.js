@@ -2,8 +2,9 @@ const mongoose = require('mongoose');
 const cities = require('./cities');
 const { places, descriptors } = require('./seedHelpers');
 const Campground = require('../models/campground');
+require('dotenv/config');
 
-mongoose.connect('mongodb+srv://darshan:darshanp123@cluster0.6r0ou.mongodb.net/yelp-camp?retryWrites=true&w=majority', {
+mongoose.connect(process.env.db_connection, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true
@@ -21,9 +22,10 @@ const price = Math.floor(Math.random()*20) +10;
 
 const seedDB = async () => {
     await Campground.deleteMany({});
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 8; i++) {
         const random1000 = Math.floor(Math.random() * 1000);
         const camp = new Campground({
+            author: '60eb031c8e2db5963484e514',
             location: `${cities[random1000].city}, ${cities[random1000].state}`,
             title: `${sample(descriptors)} ${sample(places)}`,
             image: 'https://source.unsplash.com/collection/483251',
@@ -36,4 +38,4 @@ const seedDB = async () => {
 
 seedDB().then(() => {
     mongoose.connection.close();
-})
+});

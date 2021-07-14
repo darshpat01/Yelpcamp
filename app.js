@@ -23,9 +23,9 @@ require('dotenv/config');
 
 // const Review = require('./models/review');
 
-
-const campgrounds = require('./routes/campgrounds'); 
-const reviews = require('./routes/reviews'); 
+const userRoutes = require('./routes/users'); 
+const campgroundRoutes = require('./routes/campgrounds'); 
+const reviewRoutes = require('./routes/reviews'); 
 
 
 // const seeds = require('./seeds/index');
@@ -80,23 +80,21 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser()); 
 
 
-app.get('/fakeUser', async(req,res)=>{
-    const user = new User({email: 'colt@gmail.com', username: 'colt'});
-    const newUser = await User.register(user,'chicken');
-    res.send(newUser); 
-})
+
 
 
 app.use((req, res, next) =>{
+    
+    res.locals.currentUser = req.user; 
     res.locals.success = req.flash('success'); 
     res.locals.error = req.flash('error'); 
     next(); 
 })
 
 
-
-app.use('/campgrounds', campgrounds); 
-app.use('/campgrounds/:id/reviews', reviews); 
+app.use('/', userRoutes);
+app.use('/campgrounds', campgroundRoutes); 
+app.use('/campgrounds/:id/reviews', reviewRoutes); 
 
 
 app.get('/', (req, res) => {
