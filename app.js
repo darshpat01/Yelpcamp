@@ -28,8 +28,7 @@ const campgroundRoutes = require('./routes/campgrounds');
 const reviewRoutes = require('./routes/reviews'); 
 
 
-// const seeds = require('./seeds/index');
-//  password = darshanp123
+
 mongoose.connect(process.env.db_connection, {
     useNewUrlParser: true,
     useCreateIndex: true,
