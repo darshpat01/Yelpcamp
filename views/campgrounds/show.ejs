@@ -35,6 +35,10 @@
     </form>
   </div>
   <div class="col-6">
+
+
+
+    <% if(currentUser) { %> 
     <h2>Leave a review</h2>
 
     <form
@@ -70,6 +74,8 @@
       <button class="btn btn-success mb-3">Submit</button>
 
       </form>
+
+      <% } %> 
 
     <% for(let review of campground.reviews) {%>
     <div class="card mb-3">

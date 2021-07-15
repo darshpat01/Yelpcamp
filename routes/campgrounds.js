@@ -12,6 +12,13 @@ router.get('/', async (req, res) => {
     res.render('campgrounds/index', { campgrounds });
 })
 
+
+router.get('/api', async (req, res) => {
+    const campgrounds = await Campground.find({});
+    res.json(campgrounds);
+})
+
+
 router.get('/new', isLoggedIn, (req, res) => {    
      res.render('campgrounds/new');
 })

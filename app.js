@@ -10,6 +10,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
 require('dotenv/config');
+const cors = require('cors');
 
 
 
@@ -44,6 +45,9 @@ db.once("open", () => {
 });
 
 const app = express();
+
+app.use(express.json());
+app.use(cors());
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
