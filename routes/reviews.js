@@ -11,16 +11,10 @@ const reviews = require('../controllers/reviews')
 
 
 
-router.post('/', isLoggedIn, validateReview, catchAsync(reviews.createReview))
+router.post('/', isLoggedIn, validateReview, catchAsync(reviews.createReview));
 
 
 
-router.delete('/:reviewId',isLoggedIn, isReviewAuthor,  catchAsync(async (req, res) =>{
-   const {id, reviewId} = req.params; 
-   await Campground.findByIdAndUpdate(id, {$pull: {reviews: reviewId}}); 
-   await Review.findByIdAndDelete(reviewId); 
-   req.flash('success','Successfully deleted review'); 
-   res.redirect(`/campgrounds/${id}`); 
-    }))
+router.delete('/:reviewId',isLoggedIn, isReviewAuthor,  catchAsync(reviews.deleteReview));
 
 module.exports = router; 
