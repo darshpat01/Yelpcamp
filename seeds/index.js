@@ -22,7 +22,7 @@ const price = Math.floor(Math.random()*20) +10;
 
 const seedDB = async () => {
     await Campground.deleteMany({});
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 300; i++) {
         const random1000 = Math.floor(Math.random() * 1000);
         const camp = new Campground({
             author: '60f08a81ce735a5388503ca8',
