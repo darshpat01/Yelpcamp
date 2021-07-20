@@ -2,8 +2,11 @@
 
 <link rel="stylesheet" href="/css/stars.css">
 
+
+
 <div class="row">
   <div class="col-6">
+    <div id='map' style='width: 400px; height: 300px;'></div>
     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
         <% campground.images.forEach((img, i) => {  %>
@@ -132,3 +135,10 @@
     <% } %>
   </div>
 </div>
+
+
+<script>
+  const mapToken = '<%-process.env.mapbox_token%>'; 
+</script>
+<script src="/js/showPageMap.js"></script>
+
