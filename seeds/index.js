@@ -32,19 +32,19 @@ const seedDB = async () => {
             price,
             geometry: {
                 type: 'Point' ,
-                coordinates: [ 139.7263785, 35.6652065 ]
+                coordinates: [ cities[random1000].longitude, cities[random1000].latitude ]
             },
             images:
             [
                 {
                   
-                  url: 'https://res.cloudinary.com/drqgrp2xu/image/upload/v1626701888/Yelpcamp/egqvdu8md5dydsdccnix.jpg',
-                  filename: 'Yelpcamp/egqvdu8md5dydsdccnix'
+                  url: 'https://res.cloudinary.com/drqgrp2xu/image/upload/v1626817372/Yelpcamp/437173820_750x422_zxfgjd.png',
+                  filename: 'Yelpcamp/437173820_750x422_zxfgjd'
                 },
                 {
                   
-                  url: 'https://res.cloudinary.com/drqgrp2xu/image/upload/v1626701888/Yelpcamp/qx5d1kkpp5xczru2dleu.jpg',
-                  filename: 'Yelpcamp/qx5d1kkpp5xczru2dleu'
+                  url: 'https://res.cloudinary.com/drqgrp2xu/image/upload/v1626817368/Yelpcamp/campgrounds-in-california_j7zmfs.jpg',
+                  filename: 'Yelpcamp/campgrounds-in-california_j7zmfs'
                 }
               ]
         })
