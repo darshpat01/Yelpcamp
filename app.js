@@ -17,6 +17,7 @@ const User = require('./models/user');
 const mongoSanitize = require('express-mongo-sanitize');
 const helmet = require("helmet");
 const cors = require('cors');
+const MongoStore = require('connect-mongo');
 
 
 
@@ -115,8 +116,17 @@ app.use(
 app.use(express.static(path.join(__dirname, 'public')));
 
 
+const store = new MongoStore({
+    mongoUrl: process.env.db_connection, secret:'thisshouldbeabettersecret', touchAfter: 24*3600
+})
+
+
+store.on("error", function(e){
+    console.log("Session store error!", e);
+})
 
 const sessionConfig = {
+    store,
     name:'session', 
     secret: 'thisshouldbeabettersecret',    
     resave: false, 
