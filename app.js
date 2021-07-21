@@ -115,9 +115,10 @@ app.use(
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+const secret = process.env.secret || 'getabettersecretbro';
 
 const store = new MongoStore({
-    mongoUrl: process.env.db_connection, secret:'thisshouldbeabettersecret', touchAfter: 24*3600
+    mongoUrl: process.env.db_connection, secret, touchAfter: 24*3600
 })
 
 
@@ -128,7 +129,7 @@ store.on("error", function(e){
 const sessionConfig = {
     store,
     name:'session', 
-    secret: 'thisshouldbeabettersecret',    
+    secret,    
     resave: false, 
     saveUninitialized: true,
     cookie: {
